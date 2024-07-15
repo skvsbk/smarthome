@@ -1,10 +1,10 @@
 """Маршруты для ESP32"""
 
 from fastapi import APIRouter, Depends, HTTPException
-from app.crud.probe import get_setpoint
 from app.schemas.probe_setpoint import ProbeSetpointGet
 from app.schemas.measurement import MeasurementCreate
-from app.crud.probe import post_measurement
+from app.schemas.buslog import BuslogCreate
+from app.crud.probe import get_setpoint, post_measurement, post_buslog
 
 from sqlalchemy.orm import Session
 from app.models.database import get_db
@@ -26,4 +26,10 @@ def create_measurement(value: MeasurementCreate, db: Session = Depends(get_db)):
     """Записать измерения датчика"""
     # TODO переделать на MQTT
     post_measurement(db=db, value=value)
+    return {"status": 200}
+
+@router.post("/buslog")
+def create_buslog(value: BuslogCreate, db: Session = Depends(get_db)):
+    """Записать ошибку датчика"""
+    post_buslog(db=db, value=value)
     return {"status": 200}
