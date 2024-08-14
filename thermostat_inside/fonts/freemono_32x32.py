@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+# Converted from FreeMono.ttf using:
+#     font2bitmap.py -width 32 FreeMono.ttf 32 -s .:
+
+MAP = (
+    '.:'
+)
+
+BPP = 1
+HEIGHT = 13
+MAX_WIDTH = 19
+_WIDTHS = \
+    b'\x13\x13'
+
+OFFSET_WIDTH = 2
+_OFFSETS = \
+    b'\x00\x00\x00\xf7'
+
+_BITMAPS =\
+    b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'\
+    b'\x00\x00\x00\x00\x00\x00\x1c\x00\x07\xc0\x00\xf8\x00\x0f\x00\x01'\
+    b'\xe0\x00\x7c\x00\x0f\x80\x00\xe0\x00\x00\x00\x00\x00\x00\x00\x00'\
+    b'\x00\x00\x00\x00\x00\x38\x00\x0f\x80\x01\xf0\x00\x1e\x00'
+
+WIDTHS = memoryview(_WIDTHS)
+OFFSETS = memoryview(_OFFSETS)
+BITMAPS = memoryview(_BITMAPS)
