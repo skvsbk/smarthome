@@ -2,18 +2,12 @@
 
 from fastapi import FastAPI
 import uvicorn
-from app.routers import probe, application
+from app.routers import health, invoke
 
 app = FastAPI(title="SmartHome API server")
 
-app.include_router(probe.router, prefix="/probe", tags=["room_probe"])
-app.include_router(application.router, prefix="/aplication", tags=["aplication"])
-
-
-# @app.on_event('shutdown')
-# async def shutdown():
-#     # await database.disconnect()
-#     pass
+app.include_router(health.router, prefix="/health", tags=["health"])
+app.include_router(invoke.router, prefix="/invoke", tags=["invoke"])
 
 
 if __name__ == "__main__":
