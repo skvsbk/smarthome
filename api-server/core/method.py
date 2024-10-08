@@ -12,27 +12,27 @@ _registered_methods = {}
 
 
 def register_method(method_name: str):
-    def inner(func):
-        global _registered_methods
+    """Декоратор регистрации методов"""
+    def wrap(func):
+        # global _registered_methods
         if method_name in _registered_methods:
             if _registered_methods[method_name] == func:
                 return func
-            else:
-                log.error("### method  %s => %s.%s() already register to %s.%s()", method_name, func.__module__,
-                          func.__name__, _registered_methods[method_name].__module__,
-                          _registered_methods[method_name].__name__)
+            log.error("### method  %s => %s.%s() already register to %s.%s()", method_name, func.__module__,
+                      func.__name__, _registered_methods[method_name].__module__,
+                      _registered_methods[method_name].__name__)
 
-                sys.exit(1)
+            sys.exit(1)
         log.info("### register method  %s => %s.%s()", method_name, func.__module__, func.__name__)
         _registered_methods[method_name] = func
         return func
-    return inner
+    return wrap
 
 
 def make_methods_registry(folder_name: str):
     """Зарегистрировать методы из директории folder_name с декоратором @register_method"""
     method_root = importlib.import_module(folder_name)
-    root, module = os.path.split(method_root.__file__)
+    root, _ = os.path.split(method_root.__file__)
     _import_package(folder_name, root)
 
 
@@ -62,4 +62,5 @@ def _import_module(base_package, module_file):
 
 
 def find_registered_method(method_name: str):
+    """Вернуть зарегистрированный метод"""
     return _registered_methods.get(method_name, None)

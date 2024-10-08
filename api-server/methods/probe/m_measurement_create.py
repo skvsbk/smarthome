@@ -7,4 +7,3 @@ from core.method import register_method
 async def sh_measurement_create(params: MethodParams):
     """Метод сохранения измерений"""
     return {"status": "ok"}
-

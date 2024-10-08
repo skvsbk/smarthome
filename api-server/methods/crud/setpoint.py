@@ -3,9 +3,12 @@
 from app.models.measurement import MeasurementDB
 from app.models.probe_setpoint import ProbeSetpointDB
 from app.schemas.measurement import MeasurementCreate
+from core.utils import get_logger
 from sqlalchemy.orm import Session
 
 from .base import create_base
+
+log = get_logger(__name__)
 
 
 def setpoint_get(db: Session, probe_id: int):
@@ -14,12 +17,12 @@ def setpoint_get(db: Session, probe_id: int):
         res = db.query(ProbeSetpointDB).filter(ProbeSetpointDB.probe_id == probe_id).first()
         return res
     except Exception as e:
-        print(str(e))
+        log.error(str(e))
+        return {"error": str(e)}
 
 
 def setpiont_set(db: Session, value: MeasurementCreate):
     """Записать измерения датчика"""
-    # TODO переделать на MQTT
     res = MeasurementDB(probe_id=value.probe_id,
                         datetime_created=value.datetime_created,
                         t1=value.t1,

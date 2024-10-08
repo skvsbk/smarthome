@@ -19,4 +19,3 @@ async def invoke(body: Body, db: Session = Depends(get_db)):
 
     res = await invocation(body, db)
     return res
-

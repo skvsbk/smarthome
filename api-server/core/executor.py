@@ -6,6 +6,7 @@ from core.method import find_registered_method
 
 
 class MethodExecutor:
+    """Класс выполнения метода, пришедшего в api"""
     def __init__(self, invoke_request, db):
         self.invoke_request = invoke_request
         self.db = db
@@ -26,22 +27,22 @@ class MethodExecutor:
 
 
 class MethodParam:
-
+    """Класс описания полученных параметров для вызова методов"""
     def __init__(self, index: int, name: str, value):
         self.index = index
         self.name = name
         self.value = value
 
-
     def __str__(self):
-        return "%s(name=%s, value=%s)" % (self.__class__.__qualname__, len(self.name), len(self.value))
+        return f"{self.__class__.__qualname__}(name={len(self.name)}, value={len(self.value)})"
 
     def __repr__(self):
-        return "<%s.%s: name=%s, value=%s>" % (
-            self.__class__.__module__, self.__class__.__qualname__, len(self.name), len(self.value))
+        return (f"<{self.__class__.__module__}.{self.__class__.__qualname__}: "
+                f"name={len(self.name)}, value={len(self.value)}>")
 
 
 class MethodParams:
+    """Класс описания полученных параметра для вызова методов"""
     def __init__(self, db):
         self.params: dict = OrderedDict()
         self.db = db
@@ -66,5 +67,4 @@ class MethodParams:
     def get(self, name: str, default=None):
         if name in self.params:
             return self.params[name].value
-        else:
-            return default
+        return default
