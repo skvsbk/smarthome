@@ -1,14 +1,10 @@
 """Модуль подключения к БД"""
 
-# import os
-
 from sqlalchemy import create_engine
-# from starlette.config import Config
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 # from dotenv import load_dotenv, find_dotenv
-from app.config import DB_ADDR, DB_NAME, DB_PASS, DB_PORT, DATABASE
-
+from config.settings import DB_ADDR, DB_NAME, DB_PASS, DB_PORT, DATABASE
 
 # config = Config('.env_db')
 
