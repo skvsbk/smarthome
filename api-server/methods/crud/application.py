@@ -1,10 +1,7 @@
 """Модуль CRUD для мобильного приложения"""
 
-from sqlalchemy.orm import Session
-from .base import create_base
-from app.schemas.measurement import MeasurementCreate
-from app.models.measurement import MeasurementDB
 from app.models.probe_setpoint import ProbeSetpointDB
+from sqlalchemy.orm import Session
 
 
 def get_setpoint(db: Session, probe_id: int):
